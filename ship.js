@@ -2,7 +2,7 @@
 function Ship(length, type) {
   this.length = length;
   this.name = type;
-  this.hit_count = 0;
+  this.numHits = 0;
   this.placed = false;
 }
 
@@ -21,5 +21,22 @@ Ship.battleship = function() {
 Ship.patrolBoat = function() {
   return new Ship(2, "patrol boat")
 };
+
+Ship.prototype.hit = function() {
+  this.numHits += 1;
+};
+
+Ship.prototype.placed = function() {
+  return this.placed;
+};
+
+Ship.prototype.sunk = function() {
+  if (this.numHits === this.length) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 
 module.exports = Ship;

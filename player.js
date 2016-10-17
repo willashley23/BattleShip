@@ -1,9 +1,9 @@
 const Ship = require('./ship.js');
+const Board = require('./board.js');
 
 function Player(name) {
   this.name = name;
-  this.grid = null;
-  //this.grid = new Grid(this.name)
+  this.board = new Board(this.name)
   this.ships = this.createShips();
 }
 
