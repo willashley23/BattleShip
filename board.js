@@ -46,7 +46,7 @@ Board.prototype.hit = function(coords, player) {
   let x1 = parseInt(coordindates[0][1])
   let y1 = parseInt(coordindates[0][3])
   let target = this.cells[x1][y1];
-  
+
   if (!target && target != 'x') {
     console.log("It's a hit!");
     switch (target) {
@@ -69,7 +69,6 @@ Board.prototype.hit = function(coords, player) {
     console.log("Missfire!")
   }
 };
-
 
 
 module.exports = Board;
