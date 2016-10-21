@@ -18,4 +18,12 @@ Player.prototype.createShips = function() {
   )
 };
 
+
+Player.prototype.lost = function() {
+  Object.keys(this.ships).every( (ship) => {
+    return this.ships[ship].sunk
+  });
+};
+
+
 module.exports = Player
