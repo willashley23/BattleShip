@@ -4,6 +4,7 @@ function Board(name) {
   this.cells = this.makeBoard(7,7);
   this.name = name;
   this.placeShip = this.placeShip.bind(this);
+  this.obfuscateBoard = this.obfuscateBoard.bind(this);
 }
 
 Board.prototype.makeBoard = function(length) {
@@ -22,24 +23,22 @@ Board.prototype.placeShip = function(ship, coordindates, shipSym) {
   let y2 = parseInt(coordindates[1][1])
   let x2 = parseInt(coordindates[1][3])
 
-  // Ship extends vertically
+  // Check if ship extends vertically or horizontally
   if (y1 != y2) {
     let len = Math.abs(y1 - y2);
     
     for (let i = y1; i < len; i++) {
       this.cells[x1][i] = shipSym;
     }
-  }
-
-  // Ship extends horizontally
-  if (x1 != x2) {
+  } else if (x1 != x2) {
     let len = Math.abs(x1 - x2);
     
     for (let i = x1; i < len; i++) {
       this.cells[i][y1] = shipSym;
     }
+  } else {
+    console.log("cannot place ship")
   }
-  console.log(this.cells);
 };
 
 Board.prototype.hit = function(coords, player) {
@@ -70,5 +69,18 @@ Board.prototype.hit = function(coords, player) {
   }
 };
 
+Board.prototype.obfuscateBoard = function() {
+  deepCopy = JSON.parse(JSON.stringify(this.cells));
+  obfuscated = deepCopy.map( row => {
+    return row.map( cell => {
+      if (cell === 'x') {
+        return cell;
+      } else {
+        return '~'
+      }
+    });
+  });
+  return obfuscated;
+}
 
 module.exports = Board;

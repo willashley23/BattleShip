@@ -38,5 +38,4 @@ Ship.prototype.sunk = function() {
   }
 };
 
-
 module.exports = Ship;
