@@ -11,14 +11,14 @@ var currentPlayer = player1;
 
 console.log("Player1, time to place your ships!");
 getInput(player1.ships.aircraftCarrier, "aircraft carrier", player1);
-getInput(player1.ships.submarine, "submarine", player1);
-console.log(player1.board.cells)
+// getInput(player1.ships.submarine, "submarine", player1);
+// console.log(player1.board.cells)
 // getInput(player1.ships.battleship, "battleship", player1);
 // getInput(player1.ships.patrolBoat, "patrol boat", player1);
 console.log("Player2, time to place your ships!");
 getInput(player2.ships.aircraftCarrier, "aircraft carrier", player2);
-getInput(player2.ships.submarine, "submarine", player2);
-console.log(player2.board.cells)
+// getInput(player2.ships.submarine, "submarine", player2);
+// console.log(player2.board.cells)
 // getInput(player2.ships.battleship, "battleship", player2);
 // getInput(player2.ships.patrolBoat, "patrol boat", player2);
 
@@ -55,10 +55,11 @@ function oppositePlayer() {
 }
 
 function playGame() {
-  while (!currentPlayer.lost) {
+  var currentPlayer = player1;
+  while (!currentPlayer.lost()) {
     console.log(`${currentPlayer.name}, it's your turn!`)
     console.log("Your opponent's board:")
-    console.log(oppositePlayer.board.obfuscateBoard);
+    console.log(oppositePlayer().board.obfuscateBoard());
     var attackCoords = currentPlayer.getAttackCoords();
     currentPlayer.board.hit(attackCoords, currentPlayer);
     switchPlayers();
@@ -69,3 +70,5 @@ function playGame() {
 // function displayBoards(player) {
 
 // }
+
+playGame();

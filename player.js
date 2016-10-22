@@ -3,7 +3,7 @@ const Board = require('./board.js');
 
 function Player(name) {
   this.name = name;
-  this.board = new Board(this.name)
+  this.board = new Board(this.name);
   this.ships = this.createShips();
 }
 

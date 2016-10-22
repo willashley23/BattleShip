@@ -5,6 +5,8 @@ function Board(name) {
   this.name = name;
   this.placeShip = this.placeShip.bind(this);
   this.obfuscateBoard = this.obfuscateBoard.bind(this);
+  this.setDefault = this.setDefault.bind(this);
+  this.setDefault();
 }
 
 Board.prototype.makeBoard = function(length) {
@@ -46,7 +48,7 @@ Board.prototype.hit = function(coords, player) {
   let y1 = parseInt(coordindates[0][3])
   let target = this.cells[x1][y1];
 
-  if (!target && target != 'x') {
+  if (target != 'x' && target != '~') {
     console.log("It's a hit!");
     switch (target) {
       case 'a':
@@ -69,18 +71,22 @@ Board.prototype.hit = function(coords, player) {
   }
 };
 
+Board.prototype.setDefault = function() {
+  this.cells.forEach( row => {
+    row.fill('~');
+  });
+}
+
 Board.prototype.obfuscateBoard = function() {
-  deepCopy = JSON.parse(JSON.stringify(this.cells));
-  obfuscated = deepCopy.map( row => {
-    return row.map( cell => {
-      if (cell === 'x') {
-        return cell;
-      } else {
-        return '~'
-      }
+  let deepCopy = JSON.parse(JSON.stringify(this.cells));
+  deepCopy.forEach( (row, i) => {
+    row.forEach( (el, j) => {
+      if (el !== 'x' && el !== '~') {
+        deepCopy[i][j] = '~';
+      } 
     });
   });
-  return obfuscated;
+  return deepCopy;
 }
 
 module.exports = Board;
