@@ -34,7 +34,6 @@ function getInput(ship, shipName, player) {
   player.board.placeShip(ship, [pair1, pair2], letter);
 }
 
-
 function validCoords(p1, p2) {
   return (p1[0] != p2[0]) && (p1[1] != p2[1]) 
   // Does it have ~ for water? Is it empty?
@@ -42,11 +41,7 @@ function validCoords(p1, p2) {
 }
 
 function getAttackCoords() {
-
-}
-
-function switchPlayers() {
-  currentPlayer === player1 ? currentPlayer = player2 : currentPlayer = player1;
+  return prompt('Enter attack target ([x,y])');
 }
 
 function oppositePlayer() {
@@ -55,20 +50,15 @@ function oppositePlayer() {
 }
 
 function playGame() {
-  var currentPlayer = player1;
   while (!currentPlayer.lost()) {
     console.log(`${currentPlayer.name}, it's your turn!`)
     console.log("Your opponent's board:")
     console.log(oppositePlayer().board.obfuscateBoard());
-    var attackCoords = currentPlayer.getAttackCoords();
-    currentPlayer.board.hit(attackCoords, currentPlayer);
-    switchPlayers();
+    var attackCoords = getAttackCoords();
+    oppositePlayer().board.hit(attackCoords, oppositePlayer());
+    currentPlayer = oppositePlayer();
   }
-  console.log (`${oppositePlayer().name} loses!`)
+  console.log (`${currentPlayer().name} loses!`)
 }
-
-// function displayBoards(player) {
-
-// }
 
 playGame();

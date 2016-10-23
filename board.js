@@ -43,25 +43,25 @@ Board.prototype.placeShip = function(ship, coordindates, shipSym) {
   }
 };
 
-Board.prototype.hit = function(coords, player) {
-  let x1 = parseInt(coordindates[0][1])
-  let y1 = parseInt(coordindates[0][3])
+Board.prototype.hit = function(coordindates, player) {
+  let x1 = parseInt(coordindates[1])
+  let y1 = parseInt(coordindates[3])
   let target = this.cells[x1][y1];
 
   if (target != 'x' && target != '~') {
     console.log("It's a hit!");
     switch (target) {
       case 'a':
-        player.ships.aircraftCarrier.hit;
+        player.ships.aircraftCarrier.hit();
         break;
       case 'b':
-        player.ships.battleship.hit;
+        player.ships.battleship.hit();
         break;
       case 's':
-        player.ships.submarine.hit;
+        player.ships.submarine.hit();
         break;
       case 'p':
-        player.ships.patrolBoat.hit;
+        player.ships.patrolBoat.hit();
         break;
     }
       // Mark cell so we know that part of the ship has been hit.

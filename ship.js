@@ -1,4 +1,3 @@
-
 function Ship(length, type) {
   this.length = length;
   this.name = type;
@@ -24,10 +23,9 @@ Ship.patrolBoat = function() {
 
 Ship.prototype.hit = function() {
   this.numHits += 1;
-};
-
-Ship.prototype.placed = function() {
-  return this.placed;
+  if (this.sunk()) {
+    console.log(`You sunk your opponent's ${this.name}!`)
+  }
 };
 
 Ship.prototype.sunk = function() {
