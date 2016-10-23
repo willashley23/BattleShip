@@ -22,25 +22,23 @@ Board.prototype.makeBoard = function(length) {
 Board.prototype.placeShip = function(ship, coordindates, shipSym) {
   let x1 = parseInt(coordindates[0][1])
   let y1 = parseInt(coordindates[0][3])
-  let y2 = parseInt(coordindates[1][1])
-  let x2 = parseInt(coordindates[1][3])
-
+  let x2 = parseInt(coordindates[1][1])
+  let y2 = parseInt(coordindates[1][3])
+  console.log(x1)
+  console.log(x2)
   // Check if ship extends vertically or horizontally.
-  if (y1 != y2) {
-    let len = Math.abs(y1 - y2);
-    
-    for (let i = y1; i < len; i++) {
-      this.cells[x1][i] = shipSym;
-    }
-  } else if (x1 != x2) {
+  if (x1 != x2) {
     let len = Math.abs(x1 - x2);
-    
-    for (let i = x1; i < len; i++) {
-      this.cells[i][y1] = shipSym;
+    for (let i = x1; i < x2; i++) {
+      this.cells[y1][i] = shipSym;
     }
   } else {
-    console.log("cannot place ship")
-  }
+    let len = Math.abs(y1 - y2);
+    for (let i = y1; i < y2; i++) {
+      this.cells[i][x1] = shipSym;
+    }
+  } 
+  console.log(this.cells)
 };
 
 // 5 possible outcomes: hit, miss, repeat hit, sunk, victory.
