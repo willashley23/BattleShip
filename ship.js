@@ -5,7 +5,7 @@ function Ship(length, name) {
 }
 
 Ship.aircraftCarrier = function() {
-  return new Ship(5, "aircraft carrier")
+  return new Ship(1, "aircraft carrier")
 };
 
 Ship.submarine = function() {

@@ -7,7 +7,10 @@ var prompt = require('prompt-sync') ({
  
 var player1 = new Player("Player 1");
 var player2 = new Player("Player 2");
+var player3 = new Player("Player 3");
+var playerArray = [player1, player2, player3];
 var currentPlayer = player1;
+
 
 function gameSetup(player) {
   console.log(`${player.name}, time to place your ships.`);
@@ -92,12 +95,41 @@ function getAttackCoords() {
 }
 
 function oppositePlayer() {
-  var other = (currentPlayer === player1 ? player2 : player1);
+  
+  var other = (currentPlayer === player1 ? player2 : null);
+  if (other === null) {
+    other = (currentPlayer === player2 ? player3 : player1 );
+  }
+
+  if (other.lost()) {
+   var opponent;
+   if (other === player1) {
+     opponent = (currentPlayer === player2 ? player3 : player2);
+   } else if (other === player2) {
+     opponent = (currentPlayer === player1 ? player3 : player1);
+   } else {
+     opponent = (currentPlayer === player1 ? player2 : player1);
+   }
+  }
   return other;
 }
 
+function gameOver() {
+  var counter = 0;
+  playerArray.forEach( player => {
+    if (player.lost()) {
+      counter += 1;
+    }
+  });
+  if (counter >= 2) {
+    return true;
+  } else {
+    return false; 
+  }
+}
+
 function playGame() {
-  while (!currentPlayer.lost()) {
+  while (!gameOver()) {
     console.log(`${currentPlayer.name}, it's your turn!`)
     console.log("Your opponent's board:")
     console.log(oppositePlayer().board.obfuscateBoard());
@@ -110,4 +142,5 @@ function playGame() {
 
 gameSetup(player1);
 gameSetup(player2);
+gameSetup(player3);
 playGame();
