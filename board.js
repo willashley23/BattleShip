@@ -24,8 +24,7 @@ Board.prototype.placeShip = function(ship, coordindates, shipSym) {
   let y1 = parseInt(coordindates[0][3])
   let x2 = parseInt(coordindates[1][1])
   let y2 = parseInt(coordindates[1][3])
-  console.log(x1)
-  console.log(x2)
+
   // Check if ship extends vertically or horizontally.
   if (x1 != x2) {
     let len = Math.abs(x1 - x2);
