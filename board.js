@@ -25,7 +25,7 @@ Board.prototype.placeShip = function(ship, coordindates, shipSym) {
   let y2 = parseInt(coordindates[1][1])
   let x2 = parseInt(coordindates[1][3])
 
-  // Check if ship extends vertically or horizontally
+  // Check if ship extends vertically or horizontally.
   if (y1 != y2) {
     let len = Math.abs(y1 - y2);
     
@@ -43,6 +43,7 @@ Board.prototype.placeShip = function(ship, coordindates, shipSym) {
   }
 };
 
+// 5 possible outcomes: hit, miss, repeat hit, sunk, victory.
 Board.prototype.hit = function(coordindates, player) {
   let x1 = parseInt(coordindates[1])
   let y1 = parseInt(coordindates[3])
@@ -66,17 +67,21 @@ Board.prototype.hit = function(coordindates, player) {
     }
       // Mark cell so we know that part of the ship has been hit.
       this.cells[x1][y1] = 'x';
+  } else if (target === 'x') {
+      console.log("You already attacked that spot!");
   } else {
-    console.log("Missfire!")
+      console.log("Missfire!");
   }
 };
 
+// Fill the board with water tiles.
 Board.prototype.setDefault = function() {
   this.cells.forEach( row => {
     row.fill('~');
   });
 }
 
+// Display board only showing spots where the player has successfully hit the opponent.
 Board.prototype.obfuscateBoard = function() {
   let deepCopy = JSON.parse(JSON.stringify(this.cells));
   deepCopy.forEach( (row, i) => {
