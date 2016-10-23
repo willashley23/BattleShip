@@ -104,7 +104,6 @@ function playGame() {
     var attackCoords = getAttackCoords();
     oppositePlayer().board.hit(attackCoords, oppositePlayer());
     currentPlayer = oppositePlayer();
-    console.log(currentPlayer.lost())
   }
   console.log (`${currentPlayer.name} loses!`)
 }

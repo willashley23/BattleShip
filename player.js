@@ -12,9 +12,9 @@ Player.prototype.createShips = function() {
   return (
     {
       aircraftCarrier: Ship.aircraftCarrier(),
-      battleship:       Ship.battleship(),
-      submarine:        Ship.submarine(),
-      patrolBoat:      Ship.patrolBoat()
+      // battleship:       Ship.battleship(),
+      // submarine:        Ship.submarine(),
+      // patrolBoat:      Ship.patrolBoat()
       
     }
   )
