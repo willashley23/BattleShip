@@ -1,8 +1,7 @@
-function Ship(length, type) {
+function Ship(length, name) {
   this.length = length;
-  this.name = type;
+  this.name = name;
   this.numHits = 0;
-  this.placed = false;
 }
 
 Ship.aircraftCarrier = function() {
