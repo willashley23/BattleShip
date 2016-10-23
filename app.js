@@ -9,26 +9,20 @@ var player1 = new Player("Player 1");
 var player2 = new Player("Player 2");
 var currentPlayer = player1;
 
-console.log("Player1, time to place your ships!");
-getInput(player1.ships.aircraftCarrier, "aircraft carrier", player1);
-getInput(player1.ships.submarine, "submarine", player1);
-// console.log(player1.board.cells)
-// getInput(player1.ships.battleship, "battleship", player1);
-// getInput(player1.ships.patrolBoat, "patrol boat", player1);
-console.log("Player2, time to place your ships!");
-getInput(player2.ships.aircraftCarrier, "aircraft carrier", player2);
-getInput(player2.ships.submarine, "submarine", player2);
-// console.log(player2.board.cells)
-// getInput(player2.ships.battleship, "battleship", player2);
-// getInput(player2.ships.patrolBoat, "patrol boat", player2);
+function gameSetup(player) {
+  console.log(`${player.name}, time to place your ships.`);
+  for (var el in player.ships) {
+    getInput(player.ships[el], player.ships[el].name, player);
+  }
+}
 
 function getInput(ship, shipName, player) {
   var letter = shipName[0];
-  var pair1 = prompt(`Place your ${shipName}, start position`)
-  var pair2 = prompt(`Place your ${shipName}, end position`)
+  var pair1 = prompt(`Place your ${shipName}, start position `)
+  var pair2 = prompt(`Place your ${shipName}, end position `)
   while (!validCoords(pair1, pair2, player, ship)) {
-    var pair1 = prompt(`Place your ${shipName}, start position`)
-    var pair2 = prompt(`Place your ${shipName}, end position`)
+    var pair1 = prompt(`Place your ${shipName}, start position `)
+    var pair2 = prompt(`Place your ${shipName}, end position `)
   }
   player.board.placeShip(ship, [pair1, pair2], letter);
 }
@@ -94,7 +88,7 @@ function validCoords(p1, p2, player, ship) {
 }
 
 function getAttackCoords() {
-  return prompt('Enter attack target ([x,y])');
+  return prompt('Enter attack target in the form [y,x] ');
 }
 
 function oppositePlayer() {
@@ -110,8 +104,11 @@ function playGame() {
     var attackCoords = getAttackCoords();
     oppositePlayer().board.hit(attackCoords, oppositePlayer());
     currentPlayer = oppositePlayer();
+    console.log(currentPlayer.lost())
   }
-  console.log (`${currentPlayer().name} loses!`)
+  console.log (`${currentPlayer.name} loses!`)
 }
 
+gameSetup(player1);
+gameSetup(player2);
 playGame();
